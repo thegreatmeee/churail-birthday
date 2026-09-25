@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday Begum Sahiba 🎂💖</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', 'Poppins', sans-serif; }
+  html, body { overflow-x:hidden; }
+  body {
+    background: linear-gradient(135deg, #ffd6ec 0%, #ffeef7 40%, #fff0f5 70%, #ffc1e3 100%);
+    min-height: 100vh;
+    color: #5a2a4a;
+    position: relative;
+  }
+
+  /* Floating balloons background */
+  .balloon {
+    position: fixed;
+    bottom: -150px;
+    width: 50px;
+    height: 65px;
+    border-radius: 50%;
+    opacity: 0.85;
+    animation: floatUp linear infinite;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .balloon::after {
+    content:'';
+    position:absolute;
+    bottom:-30px;
+    left:50%;
+    width:1px;
+    height:30px;
+    background:#a0607a;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity:0; }
+    10%{ opacity:0.9; }
+    100%{ transform: translateY(-110vh) rotate(20deg); opacity:0; }
+  }
+
+  /* Sparkles */
+  .sparkle {
+    position: fixed;
+    font-size: 20px;
+    animation: twinkle 3s infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes twinkle {
+    0%,100%{ opacity:0.3; transform: scale(0.8);}
+    50%{ opacity:1; transform: scale(1.3);}
+  }
+
+  /* Pages */
+  .page {
+    display: none;
+    min-height: 100vh;
+    padding: 40px 20px 80px;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 0.8s ease;
+  }
+  .page.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity:0; transform: translateY(20px);}
+    to { opacity:1; transform: translateY(0);}
+  }
+
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 60px rgba(255, 105, 180, 0.25);
+    border: 2px solid rgba(255, 182, 213, 0.6);
+  }
+
+  h1.main-heading {
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    text-align: center;
+    background: linear-gradient(90deg, #ff4d8d, #ff8ab8, #c2185b);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(255,105,180,0.2);
+  }
+
+  p.msg {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #4a1f3a;
+    margin-bottom: 18px;
+    word-wrap: break-word;
+    text-align: justify;
+  }
+  p.msg.center { text-align:center; }
+
+  .btn {
+    display: inline-block;
+    margin: 20px 8px 0;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #ff6fa8, #ff3d7f);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 61, 127, 0.4);
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+  }
+  .btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 28px rgba(255, 61, 127, 0.55);
+  }
+  .btn.center { display:block; margin: 25px auto 0; }
+
+  /* 3D Cake */
+  .cake-stage {
+    perspective: 1000px;
+    margin: 40px auto;
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    height: 320px;
+  }
+  .cake {
+    position: relative;
+    width: 240px;
+    height: 260px;
+    transform-style: preserve-3d;
+    animation: cakeFloat 4s ease-in-out infinite;
+  }
+  @keyframes cakeFloat {
+    0%,100% { transform: rotateY(-15deg) translateY(0);}
+    50% { transform: rotateY(15deg) translateY(-10px);}
+  }
+  .layer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(180, 50, 100, 0.3), inset 0 -10px 20px rgba(0,0,0,0.1);
+  }
+  .layer1 {
+    bottom: 0;
+    width: 240px;
+    height: 80px;
+    background: linear-gradient(180deg, #ffb6d5 0%, #ff7eb3 100%);
+  }
+  .layer2 {
+    bottom: 75px;
+    width: 200px;
+    height: 70px;
+    background: linear-gradient(180deg, #ffc9e0 0%, #ff9ec7 100%);
+  }
+  .layer3 {
+    bottom: 140px;
+    width: 160px;
+    height: 60px;
+    background: linear-gradient(180deg, #ffe0ec 0%, #ffb3d1 100%);
+  }
+  .frosting {
+    position:absolute;
+    top:-8px;
+    left:0;
+    right:0;
+    height:15px;
+    background: #fff;
+    border-radius: 50% 50% 20% 20% / 100% 100% 20% 20%;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  }
+  .drip {
+    position:absolute;
+    top:5px;
+    width:10px;
+    height:15px;
+    background:#fff;
+    border-radius: 0 0 50% 50%;
+  }
+  .candle {
+    position:absolute;
+    bottom:200px;
+    left:50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 50px;
+    background: repeating-linear-gradient(45deg, #ff4d8d, #ff4d8d 5px, #fff 5px, #fff 10px);
+    border-radius: 3px;
+  }
+  .flame {
+    position:absolute;
+    bottom:250px;
+    left:50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 28px;
+    background: radial-gradient(circle at 50% 70%, #fff7a8 0%, #ffb347 40%, #ff4500 100%);
+    border-radius: 50% 50% 20% 20%;
+    box-shadow: 0 0 20px #ffb347, 0 0 40px #ff8c42;
+    animation: flicker 0.4s infinite alternate;
+    transform-origin: bottom;
+  }
+  @keyframes flicker {
+    0% { transform: translateX(-50%) scale(1) rotate(-2deg); opacity:1;}
+    100% { transform: translateX(-50%) scale(1.1, 0.9) rotate(2deg); opacity:0.9;}
+  }
+  .flame.blown { display:none; }
+
+  .cake-text {
+    position:absolute;
+    bottom: 100px;
+    left:50%;
+    transform: translateX(-50%);
+    color:#fff;
+    font-weight:700;
+    font-size: 1.1rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    white-space: nowrap;
+  }
+
+  /* Popup */
+  .popup-overlay {
+    display:none;
+    position: fixed;
+    inset:0;
+    background: rgba(90, 30, 60, 0.5);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    justify-content:center;
+    align-items:center;
+    animation: fadeIn 0.4s;
+  }
+  .popup-overlay.show { display:flex; }
+  .popup {
+    background: linear-gradient(135deg, #fff0f7, #ffd6ec);
+    padding: 40px 30px;
+    border-radius: 25px;
+    text-align:center;
+    max-width: 90%;
+    box-shadow: 0 20px 60px rgba(255, 61, 127, 0.5);
+    border: 3px solid #ff8ab8;
+    animation: popIn 0.5s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes popIn {
+    0% { transform: scale(0.3); opacity:0;}
+    100% { transform: scale(1); opacity:1;}
+  }
+  .popup h2 {
+    font-size: 1.8rem;
+    color: #c2185b;
+    margin-bottom: 15px;
+  }
+  .popup p { font-size: 1.1rem; color:#5a2a4a; margin-bottom:20px; }
+
+  /* Emoji burst */
+  .emoji-burst {
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    z-index: 200;
+    overflow:hidden;
+  }
+  .emoji-burst span {
+    position:absolute;
+    font-size: 28px;
+    animation: burst 5s linear forwards;
+  }
+  @keyframes burst {
+    0% { transform: translate(0,0) scale(0) rotate(0); opacity:0;}
+    20% { opacity:1; transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(180deg);}
+    100% { transform: translate(var(--tx2), var(--ty2)) scale(0.6) rotate(720deg); opacity:0;}
+  }
+
+  /* Kiss animation */
+  .kiss-float {
+    position: fixed;
+    font-size: 40px;
+    animation: kissFloat 3s ease-out forwards;
+    pointer-events:none;
+    z-index: 50;
+  }
+  @keyframes kissFloat {
+    0% { transform: translateY(0) scale(0.5); opacity:0;}
+    30% { opacity:1; transform: translateY(-50px) scale(1.2);}
+    100% { transform: translateY(-200px) scale(0.8); opacity:0;}
+  }
+
+  /* Hearts rain for final page */
+  .heart-rain {
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    z-index: 1;
+    overflow:hidden;
+  }
+  .heart-rain span {
+    position:absolute;
+    top:-30px;
+    font-size: 24px;
+    animation: heartFall linear infinite;
+  }
+  @keyframes heartFall {
+    0% { transform: translateY(0) rotate(0); opacity:0;}
+    10% { opacity:1;}
+    100% { transform: translateY(110vh) rotate(360deg); opacity:0.3;}
+  }
+
+  /* Final hug emoji block */
+  .hug-block {
+    margin-top: 30px;
+    font-size: 1.5rem;
+    line-height: 1;
+    word-break: break-all;
+    text-align:center;
+    color: #ff4d8d;
+    animation: pulseHug 2s infinite;
+  }
+  @keyframes pulseHug {
+    0%,100% { transform: scale(1);}
+    50% { transform: scale(1.02);}
+  }
+
+  @media (max-width: 500px) {
+    .container { padding: 25px 18px; }
+    h1.main-heading { font-size: 1.7rem; }
+    p.msg { font-size: 0.98rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating balloons -->
+<div id="balloons"></div>
+<div id="sparkles"></div>
+<div class="heart-rain" id="heartRain"></div>
+
+<!-- ============ PAGE 1 ============ -->
+<section class="page active" id="page1">
+  <div class="container">
+    <h1 class="main-heading">Hi begum sahiba🫂 assalamualikum..</h1>
+
+    <p class="msg">kesi hein ap churail kahin kiii? and sab kesa jara hay?🫂</p>
+
+    <p class="msg">aryyy nhinnn ap to ab or chotii hogii hein cuz itss begumss bdayyy to ab thora axhaa se mukhatib krnaa prygaa hena?........... to bakhidmat janab malkin sahiba... 🫂🫂🫂🫂</p>
+
+    <p class="msg">aj ap offically 18/2=9.....9/3=2 ... 2 years ki hogii hein... wow begumm thatss greattt mashallah mashallah.........🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">allah apkoo hameshaa kushh rakhyyy andd apkaa naseeb bhttt bhtt bhttt achaaa kryyyy andd apkooo wo sab da jo u wanttt... and hameshaa apkoo apniii hifazat meinn rakhyyy ameen ameen ameen....... mere liaa to wese hii ap meri jawn hein.....🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">tareef to krdun magar masla hay ye.... aghaz ka bad kinara nahi mil payga...... yourrr eyesssssssss.................. inki to baat hi alag hayyy.... from here i started to loveee you..........🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">or ajjj biiii in ankhon ka samnyyy meri himat jawab dejatii hayyy.....🫂🫂🫂 i forget how to behave infront of begummm....🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">anddd phrrr janab kii smileee.................. mujee still wo 1st smile nahii bholtiii.... itt wass bestt oneee yarrr🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">phrrr janab jistrhann seee dekhtee hein.... basss khraa khraa sansein disturb krdete heinn....... 🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">phrrr janab ka cheeksssss...... the chubby oneee.... khinchnaa kaa dilll too bhttt krtaa hayyy butt aj takk reham kar rhaa hun ap parrr......... kabii khinchungaaa zaror ek barr.........................🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">to in shortt begumm kehneee koo bhtt hayyy lknn jab pass bethogaa naa tab btaoungaa bhtt axhaa seee..... pass bitha karr inshallah🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">i wouldd sayyy on thiss dayy kaa..... Arisha............ i just reallyyy lovee youuu........ i loveeee youuuuu sooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo muchhh seeee bi ziadaaaa................ sooooooooooooo muchhhhhhhhh......... itnaaa kaa i want u to be my begum.... my wifeee.... meri izzat.... myy malkinnn🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂 and inshallah u will bee🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">mein chahata hun to have a familyy with uuuu................................ and inshallah bhtt jaldd ameen ameen ameen ameen ameen 🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">ap mujee achaa lagta ho kukee ap larta bi ho mujsee ghussa bii krtaa hoo butt app smjhta hooo.... sath dte ho... suntaa hooo.... which is besttt🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂.... bakii ghussa nakhryyy sab sir ankhonnn parr janna.......🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg">feeeelll zorrr se.......................................🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg center" style="font-weight:700; font-size:1.2rem; color:#c2185b;">to itss yourr bdayy rightt letss celibrateee...... 🎉🎂💖</p>
+
+    <button class="btn center" onclick="goTo('page2')">yes letss go 💕</button>
+  </div>
+</section>
+
+<!-- ============ PAGE 2 ============ -->
+<section class="page" id="page2">
+  <div class="container">
+    <h1 class="main-heading">🎂 Make a Wish Begum 🎂</h1>
+    <p class="msg center">blow the candless and make a wishhhh... ✨</p>
+
+    <div class="cake-stage">
+      <div class="cake">
+        <div class="layer layer1"><div class="frosting"></div></div>
+        <div class="layer layer2"><div class="frosting"></div></div>
+        <div class="layer layer3"><div class="frosting"></div></div>
+        <div class="cake-text">Happy Birthday<br>Begum 💖</div>
+        <div class="candle"></div>
+        <div class="flame" id="flame"></div>
+      </div>
+    </div>
+
+    <button class="btn center" onclick="blowCandles()">blow the candles 🌬️</button>
+    <button class="btn center" id="nextBtn2" style="display:none;" onclick="goTo('page3')">next ➡️</button>
+  </div>
+</section>
+
+<!-- ============ PAGE 3 ============ -->
+<section class="page" id="page3">
+  <div class="container">
+    <h1 class="main-heading">shhhhhhhhh🫂🫂</h1>
+
+    <p class="msg">begumm open dandian and have cakee..........</p>
+
+    <p class="msg">then from nextline sayy ohoo ye to apkaa cheeks par lag giaa.... leme clearr itt.... passs ayeinn thoraa saaa...................💋💋💋💋</p>
+
+    <p class="msg">ammm donereeeeeeeeeeeee........................................ ahmmm kherr bakii sabb ab yhan nahi kete burii baat.......💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋💋</p>
+
+    <p class="msg">feeelll justtt.................🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <p class="msg" style="font-weight:700; color:#c2185b;">chleinn ek offer hay..... raat hmari?..... option srf yes ka hi hogaa... isbar choice isntt yoursss begumm.......🫂🫂🫂🫂🫂🫂🫂🫂🫂</p>
+
+    <button class="btn center" onclick="showQabool()">yes 💖</button>
+    <button class="btn center" id="qaboolBtn" style="display:none;" onclick="goTo('page4')">qabool hay 💍</button>
+  </div>
+</section>
+
+<!-- ============ PAGE 4 ============ -->
+<section class="page" id="page4">
+  <div class="container">
+    <h1 class="main-heading">chleinn donee begu.................🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂</h1>
+
+    <p class="msg">to oncee againn happy birthdayyyy begummm sahibaaa🫂🫂🫂🫂 allah apkoo dheron khusiaa dayyy... ameeenn🫂🫂🫂🫂🫂</p>
+
+    <p class="msg" style="text-align:center; font-weight:700; color:#c2185b; font-size:1.15rem;">
+      🌸 My dearest Arisha, my begum, my malkin 🌸<br><br>
+      May Allah fill your life with endless joy, good health, success, and barakah. May every dream you see in those beautiful eyes come true. May our journey together be filled with love, laughter, and countless blessings. You are my peace, my home, my everything. Happy Birthday once again, my queen 👑💖
+    </p>
+
+    <button class="btn center" onclick="finalWish()">ameen 🤲</button>
+
+    <div id="finalBlock" style="display:none;">
+      <p class="msg center" style="font-weight:700; color:#c2185b; font-size:1.2rem;">
+        after wishies, feel zorrr see🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂🫂......
+      </p>
+      <div class="hug-block" id="hugBlock"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Popup -->
+<div class="popup-overlay" id="popup">
+  <div class="popup">
+    <h2>🎉 Happy Birthday dearest begummm 🎉</h2>
+    <p>🫂🫂🫂🫂🫂💖🎂✨🌸</p>
+    <button class="btn" onclick="closePopup()">aww 💕</button>
+  </div>
+</div>
+
+<!-- Emoji burst container -->
+<div class="emoji-burst" id="emojiBurst"></div>
+
+<script>
+  // ===== Balloons =====
+  const balloonColors = ['#ff6fa8','#ffb3d1','#ff3d7f','#ffc1e3','#c2185b','#ff8ab8','#ffd6ec'];
+  const balloonsContainer = document.getElementById('balloons');
+  for (let i=0; i<15; i++) {
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    b.style.left = Math.random()*100 + 'vw';
+    b.style.background = `radial-gradient(circle at 30% 30%, #fff, ${balloonColors[i%balloonColors.length]})`;
+    b.style.animationDuration = (8 + Math.random()*10) + 's';
+    b.style.animationDelay = (Math.random()*10) + 's';
+    b.style.width = (40 + Math.random()*25) + 'px';
+    b.style.height = (55 + Math.random()*30) + 'px';
+    balloonsContainer.appendChild(b);
+  }
+
+  // ===== Sparkles =====
+  const sparkleChars = ['✨','⭐','💖','🌸','💕'];
+  const sparklesContainer = document.getElementById('sparkles');
+  for (let i=0; i<20; i++) {
+    const s = document.createElement('div');
+    s.className = 'sparkle';
+    s.textContent = sparkleChars[Math.floor(Math.random()*sparkleChars.length)];
+    s.style.left = Math.random()*100 + 'vw';
+    s.style.top = Math.random()*100 + 'vh';
+    s.style.animationDelay = (Math.random()*3) + 's';
+    sparklesContainer.appendChild(s);
+  }
+
+  // ===== Heart rain for final page =====
+  const heartRain = document.getElementById('heartRain');
+  function startHeartRain() {
+    const hearts = ['💖','💕','💗','🌸','💝'];
+    setInterval(() => {
+      const h = document.createElement('span');
+      h.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.animationDuration = (4 + Math.random()*4) + 's';
+      heartRain.appendChild(h);
+      setTimeout(()=>h.remove(), 9000);
+    }, 300);
+  }
+
+  // ===== Page navigation =====
+  function goTo(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo({top:0, behavior:'smooth'});
+    if (id === 'page4') startHeartRain();
+  }
+
+  // ===== Blow candles =====
+  function blowCandles() {
+    const flame = document.getElementById('flame');
+    flame.classList.add('blown');
+    setTimeout(() => {
+      document.getElementById('popup').classList.add('show');
+      document.getElementById('nextBtn2').style.display = 'block';
+      launchConfetti();
+    }, 600);
+  }
+
+  function closePopup() {
+    document.getElementById('popup').classList.remove('show');
+  }
+
+  // ===== Confetti =====
+  function launchConfetti() {
+    const burst = document.getElementById('emojiBurst');
+    const emojis = ['🎉','🎊','🎂','💖','🌸','✨','💕','🎈','🎁','💗'];
+    for (let i=0; i<60; i++) {
+      const s = document.createElement('span');
+      s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      const startX = window.innerWidth/2;
+      const startY = window.innerHeight/2;
+      s.style.left = startX + 'px';
+      s.style.top = startY + 'px';
+      const angle = Math.random()*Math.PI*2;
+      const dist = 200 + Math.random()*300;
+      s.style.setProperty('--tx', Math.cos(angle)*dist + 'px');
+      s.style.setProperty('--ty', Math.sin(angle)*dist + 'px');
+      s.style.setProperty('--tx2', Math.cos(angle)*dist*1.3 + 'px');
+      s.style.setProperty('--ty2', (Math.sin(angle)*dist*1.3 + 200) + 'px');
+      s.style.animationDelay = (Math.random()*0.5) + 's';
+      burst.appendChild(s);
+      setTimeout(()=>s.remove(), 5500);
+    }
+  }
+
+  // ===== Qabool flow =====
+  function showQabool() {
+    document.getElementById('qaboolBtn').style.display = 'block';
+    // Kiss animation
+    for (let i=0; i<15; i++) {
+      setTimeout(() => {
+        const k = document.createElement('div');
+        k.className = 'kiss-float';
+        k.textContent = '💋';
+        k.style.left = (20 + Math.random()*60) + 'vw';
+        k.style.bottom = '20px';
+        document.body.appendChild(k);
+        setTimeout(()=>k.remove(), 3000);
+      }, i*150);
+    }
+  }
+
+  // ===== Final wish + 1000 hugs in 5 seconds =====
+  function finalWish() {
+    document.getElementById('finalBlock').style.display = 'block';
+    const block = document.getElementById('hugBlock');
+    block.innerHTML = '';
+    const total = 1000;
+    const duration = 5000; // 5 seconds
+    const interval = duration / total; // 5ms each
+    let count = 0;
+    const timer = setInterval(() => {
+      // Add multiple at once if needed for performance
+      const batch = 5;
+      for (let i=0; i<batch && count<total; i++, count++) {
+        block.innerHTML += '🫂';
+      }
+      if (count >= total) {
+        clearInterval(timer);
+        launchConfetti();
+      }
+    }, interval);
+  }
+</script>
+</body>
+</html>
